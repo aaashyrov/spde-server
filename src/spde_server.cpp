@@ -26,6 +26,7 @@ void validate(const ::spde::Request *request);
   };
 
   try {
+    std::clog << "[spde]: solve start" << std::endl;
     validate(request);
     const auto size = request->function().x_size();
     std::vector<float> a(size, 0.0);
@@ -53,6 +54,7 @@ void validate(const ::spde::Request *request);
       response->mutable_u()->Add(u);
     }
 
+    std::clog << "[spde]: solve done" << std::endl;
     return grpc::Status(grpc::StatusCode::OK, "done");
   } catch (std::exception &ex) {
     return fail(ex);
