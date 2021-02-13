@@ -89,5 +89,7 @@ void validate(const ::spde::Request *request) {
   }
 }
 
-SpdeServer::~SpdeServer() = default;
+SpdeServer::~SpdeServer() {
+  server_->Shutdown();
+};
 
