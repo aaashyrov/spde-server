@@ -20,7 +20,6 @@ class SpdeServer : public spde::Spde::Service {
                        const ::spde::Request *request,
                        ::spde::Response *response) override;
 
-  static void validate(const ::spde::Request *request);
 
   grpc::ServerBuilder builder_;
   std::unique_ptr<grpc::Server> server_;
