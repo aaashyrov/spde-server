@@ -39,7 +39,7 @@ std::vector<float> solve(const std::vector<float> &a, const std::vector<float> &
   std::clog << "[sweep.solve]: reverse run start" << std::endl;
   std::vector<float> x(d.size(), 0.0);
   x[m] = beta[m];
-  for (size_t i = m - 1; i >= 0; --i) {
+  for (int  i = m - 1; i >= 0; --i) {
     x[i] = alpha[i] * x[i + 1] + beta[i];
   }
   std::clog << "[sweep.solve]: reverse run done" << std::endl;

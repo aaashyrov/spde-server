@@ -14,13 +14,13 @@ grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTOS})
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTOS})
 
 set(HDRS
-    include/sweep.hpp
-    include/spde_server.hpp
+        include/sweep.hpp
+        include/spde_server.hpp
         )
 
 set(SRCS
-    src/sweep.cpp
-    src/spde_server.cpp
+        src/sweep.cpp
+        src/spde_server.cpp
         )
 
 include_directories(
@@ -41,7 +41,23 @@ add_executable(${PROJECT_NAME}
         ${PROTO_SRCS}
         )
 
+add_executable(spde-client
+        main_client.cpp
+        src/spde_client.cpp
+        include/spde_client.hpp
+        ${GRPC_HDRS}
+        ${GRPC_SRCS}
+        ${PROTO_HDRS}
+        ${PROTO_SRCS}
+        )
+
 target_link_libraries(${PROJECT_NAME}
+        pthread
+        ${GRPC_LIBRARIES}
+        ${PROTOBUF_LIBRARIES}
+        )
+
+target_link_libraries(spde-client
         pthread
         ${GRPC_LIBRARIES}
         ${PROTOBUF_LIBRARIES}
