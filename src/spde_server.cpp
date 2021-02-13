@@ -57,7 +57,6 @@ void validate(const ::spde::Request *request) {
       throw std::runtime_error("[spde.validate]: invalid grid of x args");
     }
   }
-
 }
 
 SpdeServer::~SpdeServer() = default;
