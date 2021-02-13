@@ -20,6 +20,6 @@ WORKDIR /opt/
 COPY ./ ./spde-server/
 
 WORKDIR /opt/spde-server/
-RUN ls -la && mkdir -p -v build && cd build && cmake .. && make
+RUN pwd && ls -la && mkdir -p -v build && cd build && cmake .. && make
 
 CMD ["/opt/spde-server/build/spde-server", "0.0.0.0:50051"]
