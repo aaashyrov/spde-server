@@ -78,10 +78,6 @@ void validate(const ::spde::Request *request) {
   if (request->method() != spde::SWEEP) {
     throw std::runtime_error("[spde.validate]: only SWEEP method supported");
   }
-  if (request->conditions(0).x() >= request->function().x(0)
-      or request->conditions(1).x() <= request->function().x(request->function().x().size() - 1)) {
-    throw std::runtime_error("[spde.validate]: invalid initial condition data");
-  }
   for (size_t i = 0; i < request->function().x_size() - 1; ++i) {
     if (request->function().x(i) >= request->function().x(i + 1)) {
       throw std::runtime_error("[spde.validate]: invalid grid of x args");
@@ -91,5 +87,4 @@ void validate(const ::spde::Request *request) {
 
 SpdeServer::~SpdeServer() {
   server_->Shutdown();
-};
-
+}
