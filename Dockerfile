@@ -22,4 +22,6 @@ COPY ./ ./spde-server/
 WORKDIR /opt/spde-server/
 RUN pwd && ls -la && mkdir -p -v build && cd build && cmake .. && make
 
+EXPOSE 50051
+
 CMD ["/opt/spde-server/build/spde-server", "0.0.0.0:50051"]
