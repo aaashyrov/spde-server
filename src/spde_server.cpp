@@ -49,7 +49,7 @@ void validate(const ::spde::Request *request);
     a[size - 1] = 0;
     b[size - 1] = 1;
     d[0] = request->conditions(0).u();
-    d[size - 1] = request->conditions(0).u();
+    d[size - 1] = request->conditions(1).u();
 
     auto U = sweep::solve(a, b, c, d);
     for (const auto &u: U) {
