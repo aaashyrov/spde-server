@@ -33,9 +33,11 @@ void validate(const ::spde::Request *request);
     std::vector<float> b(size, 0.0);
     std::vector<float> c(size, 0.0);
     std::vector<float> d(size, 0.0);
+
     const auto x = request->function().x();
     const auto q = request->function().q();
     const auto f = request->function().f();
+
     for (size_t i = 1; i < size - 1; ++i) {
       auto h2 = (x[i + 1] - x[i]) * (x[i] - x[i - 1]);
       a[i] = c[i] = -1;
