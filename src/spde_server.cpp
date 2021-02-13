@@ -39,6 +39,9 @@ void SpdeServer::validate(const ::spde::Request *request) {
   if (request->kind() != spde::I) {
     throw std::runtime_error("[spde.validate]: II and III kinds are not supported yet");
   }
+  if (request->method() != spde::SWEEP) {
+    throw std::runtime_error("[spde.validate]: only SWEEP method supported");
+  }
 }
 
 SpdeServer::~SpdeServer() = default;

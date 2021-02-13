@@ -4,7 +4,8 @@ import "google/protobuf/any.proto";
 package spde;
 
 enum Method{
-  SWEEP = 0;
+  ANY = 0;
+  SWEEP = 1;
 }
 
 message Function{
@@ -26,8 +27,9 @@ enum Kind{
 
 message Request{
   Kind kind = 1;
-  Function function = 2;
-  repeated Condition conditions = 3;
+  Method method = 2;
+  Function function = 3;
+  repeated Condition conditions = 4;
 }
 
 message Response{
