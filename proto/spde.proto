@@ -15,8 +15,7 @@ message Function{
 }
 
 message Condition{
-  float X = 1;
-  float U = 2;
+  float U = 1;
 }
 
 enum Kind{
