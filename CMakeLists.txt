@@ -4,7 +4,6 @@ project(spde-server)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(GRPC REQUIRED)
-find_package(CURL REQUIRED)
 find_package(Protobuf REQUIRED)
 
 set(PROTOS
