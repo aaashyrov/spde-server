@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "google/protobuf/any.proto";
+
+package spde;
+
+enum Method{
+  SWEEP = 0;
+}
+
+message Function{
+  repeated float X = 1;
+  repeated float Q = 2;
+  repeated float F = 3;
+}
+
+message Condition{
+  float X = 1;
+  float U = 2;
+
+  enum Kind{
+    I = 0;
+    II = 1;   /// <<< not supported
+    III = 2;  /// <<< not supported
+  }
+  Kind kind = 3;
+}
+
+message Request{
+  Function function = 2;
+  repeated Condition conditions = 1;
+}
+
+message Response{
+  repeated float U = 1;
+}
+
+service Spde{
+  rpc solve(Request) returns (Response){}
+}
