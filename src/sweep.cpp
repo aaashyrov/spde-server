@@ -15,6 +15,9 @@ std::vector<float> solve(const std::vector<float> &a, const std::vector<float> &
   if (a.size() != b.size() or a.size() != c.size() or a.size() != d.size()) {
     throw std::runtime_error("[sweep.solve]: must be a.size==b.size==c.size==d.size");
   }
+  if (b[0] == 0) {
+    throw std::runtime_error("[sweep.solve]: b[0]==0");
+  }
   std::clog << "[sweep.solve]: start" << std::endl;
 
   std::clog << "[sweep.solve]: straight run start" << std::endl;

@@ -1,7 +1,7 @@
 //
 // Created by alisher on 13.02.2021.
 //
-
+#include <sweep.hpp>
 #include "../include/spde_server.hpp"
 
 SpdeServer::SpdeServer(const std::string &endpoint) {
@@ -27,7 +27,33 @@ void validate(const ::spde::Request *request);
 
   try {
     validate(request);
+    const auto size = request->function().x_size();
+    std::vector<float> a(size, 0.0);
+    std::vector<float> b(size, 0.0);
+    std::vector<float> c(size, 0.0);
+    std::vector<float> d(size, 0.0);
+    const auto x = request->function().x();
+    const auto q = request->function().q();
+    const auto f = request->function().f();
+    for (size_t i = 1; i < size - 1; ++i) {
+      auto h2 = (x[i + 1] - x[i]) * (x[i] - x[i - 1]);
+      a[i] = c[i] = -1;
+      d[i] = h2 * f[i];
+      b[i] = 2 + h2 * q[i];
+    }
+    b[0] = 1;
+    c[0] = 0;
+    a[size - 1] = 0;
+    b[size - 1] = 1;
+    d[0] = request->conditions(0).u();
+    d[size - 1] = request->conditions(0).u();
 
+    auto U = sweep::solve(a, b, c, d);
+    for (const auto &u: U) {
+      response->mutable_u()->Add(u);
+    }
+
+    return grpc::Status(grpc::StatusCode::OK, "done");
   } catch (std::exception &ex) {
     return fail(ex);
   }
