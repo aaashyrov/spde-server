@@ -16,11 +16,21 @@ protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTOS})
 
 set(HDRS
     include/sweep.hpp
+    include/spde_server.hpp
         )
 
 set(SRCS
     src/sweep.cpp
+    src/spde_server.cpp
         )
+
+include_directories(
+        include
+        ${CURL_INCLUDE_DIR}
+        ${GRPC_INCLUDE_DIRS}
+        ${PROTOBUF_INCLUDE_DIRS}
+        ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 add_executable(${PROJECT_NAME}
         main.cpp
